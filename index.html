@@ -16,6 +16,31 @@
             margin-top: 20px;
             font-weight: bold;
         }
+        img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -25,7 +50,7 @@
 <div id="questionnaire">
     <div class="question" id="question1">
         <p>Is your window a sliding window that opens from side to side?</p>
-        <img src="sliding-window.jpg" alt="Sliding Window" width="300">
+        <img src="sliding-window.jpg" alt="Sliding Window">
         <br>
         <button onclick="answerQuestion1(true)">Yes</button>
         <button onclick="answerQuestion1(false)">No</button>
@@ -33,7 +58,7 @@
 
     <div class="question" id="question2" style="display: none;">
         <p>Is your window Dry Keep?</p>
-        <img src="dry-keep-window.jpg" alt="Dry Keep Window" width="300">
+        <img src="dry-keep-window.jpg" alt="Dry Keep Window">
         <br>
         <button onclick="answerQuestion2(true)">Yes</button>
         <button onclick="answerQuestion2(false)">No</button>
@@ -58,6 +83,10 @@
 
     <div class="result" id="result" style="display: none;">
     </div>
+
+    <div id="try-again" style="display: none;">
+        <button onclick="tryAgain()">Try Again</button>
+    </div>
 </div>
 
 <script>
@@ -75,6 +104,7 @@
         if (isDryKeep) {
             document.getElementById('result').innerText = 'Our screen is not suitable for Dry Keep windows.';
             document.getElementById('result').style.display = 'block';
+            document.getElementById('try-again').style.display = 'block';
         } else {
             document.getElementById('question3').style.display = 'block';
         }
@@ -87,6 +117,7 @@
         } else {
             document.getElementById('result').innerText = 'Our screen is not suitable for your window type.';
             document.getElementById('result').style.display = 'block';
+            document.getElementById('try-again').style.display = 'block';
         }
     }
 
@@ -133,6 +164,17 @@
 
         resultDiv.innerText = resultText;
         resultDiv.style.display = 'block';
+        document.getElementById('try-again').style.display = 'block';
+    }
+
+    function tryAgain() {
+        document.getElementById('questionnaire').reset();
+        document.getElementById('question1').style.display = 'block';
+        document.getElementById('question2').style.display = 'none';
+        document.getElementById('question3').style.display = 'none';
+        document.getElementById('measurement').style.display = 'none';
+        document.getElementById('result').style.display = 'none';
+        document.getElementById('try-again').style.display = 'none';
     }
 </script>
 
