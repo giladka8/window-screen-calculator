@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window Screen Selector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Window Screen Selector</h1>
+
+<div id="questionnaire">
+    <div class="question" id="question1">
+        <p>Is your window a sliding window that opens from side to side?</p>
+        <img src="sliding-window.jpg" alt="Sliding Window" width="300">
+        <br>
+        <button onclick="answerQuestion1(true)">Yes</button>
+        <button onclick="answerQuestion1(false)">No</button>
+    </div>
+
+    <div class="question" id="question2" style="display: none;">
+        <p>Is your window Dry Keep?</p>
+        <img src="dry-keep-window.jpg" alt="Dry Keep Window" width="300">
+        <br>
+        <button onclick="answerQuestion2(true)">Yes</button>
+        <button onclick="answerQuestion2(false)">No</button>
+    </div>
+
+    <div class="question" id="question3" style="display: none;">
+        <p>Does your window open inward or outward like a door?</p>
+        <br>
+        <button onclick="answerQuestion3(true)">Yes</button>
+        <button onclick="answerQuestion3(false)">No</button>
+    </div>
+
+    <div class="question" id="measurement" style="display: none;">
+        <p>Please enter the width and height of your window:</p>
+        <label for="width">Width (cm):</label>
+        <input type="number" id="width" name="width">
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" name="height">
+        <br>
+        <button onclick="checkDimensions()">Check Dimensions</button>
+    </div>
+
+    <div class="result" id="result" style="display: none;">
+    </div>
+</div>
+
+<script>
+    function answerQuestion1(isSliding) {
+        document.getElementById('question1').style.display = 'none';
+        if (isSliding) {
+            document.getElementById('measurement').style.display = 'block';
+        } else {
+            document.getElementById('question2').style.display = 'block';
+        }
+    }
+
+    function answerQuestion2(isDryKeep) {
+        document.getElementById('question2').style.display = 'none';
+        if (isDryKeep) {
+            document.getElementById('result').innerText = 'Our screen is not suitable for Dry Keep windows.';
+            document.getElementById('result').style.display = 'block';
+        } else {
+            document.getElementById('question3').style.display = 'block';
+        }
+    }
+
+    function answerQuestion3(opensLikeDoor) {
+        document.getElementById('question3').style.display = 'none';
+        if (opensLikeDoor) {
+            document.getElementById('measurement').style.display = 'block';
+        } else {
+            document.getElementById('result').innerText = 'Our screen is not suitable for your window type.';
+            document.getElementById('result').style.display = 'block';
+        }
+    }
+
+    function checkDimensions() {
+        const width = parseFloat(document.getElementById('width').value);
+        const height = parseFloat(document.getElementById('height').value);
+        const resultDiv = document.getElementById('result');
+        let resultText = '';
+
+        if (isNaN(width) || isNaN(height)) {
+            resultText = 'Please enter valid dimensions.';
+        } else {
+            if (width >= 30 && height >= 40 && height <= 72) {
+                resultText += 'Small screen is suitable. ';
+            }
+            if (width >= 40 && height >= 50 && height <= 92) {
+                resultText += 'Medium screen is suitable. ';
+            }
+            if (width >= 45 && height >= 60 && height <= 112) {
+                resultText += 'Medium Tall screen is suitable. ';
+            }
+            if (width >= 50 && height >= 70 && height <= 132) {
+                resultText += 'Large screen is suitable. ';
+            }
+            if (width >= 60 && height >= 85 && height <= 162) {
+                resultText += 'XL screen is suitable. ';
+            }
+            if (width >= 65 && height >= 100 && height <= 192) {
+                resultText += 'XL Tall screen is suitable. ';
+            }
+            if (width >= 99 && height >= 65 && height <= 122) {
+                resultText += 'Square screen is suitable. ';
+            }
+            if (width >= 65 && height >= 117 && height <= 226) {
+                resultText += 'XXL screen is suitable. ';
+            }
+            if (width >= 80 && height >= 125 && height <= 242) {
+                resultText += 'Jumbo screen is suitable. ';
+            }
+            if (resultText === '') {
+                resultText = 'No suitable screen found for your dimensions.';
+            }
+        }
+
+        resultDiv.innerText = resultText;
+        resultDiv.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
