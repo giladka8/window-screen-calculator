@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
     <title>מדריך לבחירת רשת לחלון</title>
     <style>
         body {
@@ -47,13 +44,6 @@
         }
     </style>
 </head>
-<script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js').then(registration => {
-            console.log('Service Worker registered with scope:', registration.scope);
-        });
-    }
-</script>
 <body>
 
 <h1>מדריך לבחירת רשת לחלון</h1>
@@ -101,6 +91,15 @@
 </div>
 
 <script>
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+            console.log('Service Worker registered with scope:', registration.scope);
+        }).catch(function(error) {
+            console.log('Service Worker registration failed:', error);
+        });
+    }
+
     function answerQuestion1(isSliding) {
         document.getElementById('question1').style.display = 'none';
         if (isSliding) {
@@ -166,7 +165,7 @@
                 resultText += 'רשת XXL מתאימה. ';
             }
             if (width >= 80 && height >= 125 && height <= 242) {
-                resultText += 'רשת ג'מבו מתאימה. ';
+                resultText += 'רשת ג\'מבו מתאימה. ';
             }
             if (resultText === '') {
                 resultText = 'לא נמצאה רשת מתאימה למידות שלך.';
