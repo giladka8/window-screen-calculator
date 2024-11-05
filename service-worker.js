@@ -1,4 +1,4 @@
-const CACHE_NAME = 'window-screen-cache-v1';
+const CACHE_NAME = 'window-screen-cache-v2'; // Update version when you make changes
 const urlsToCache = [
     '/index.html',
     '/sliding-window.jpg',
@@ -8,6 +8,7 @@ const urlsToCache = [
 
 // Install event - cache resources
 self.addEventListener('install', event => {
+    self.skipWaiting(); // Activate the service worker immediately
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache => {
             return cache.addAll(urlsToCache);
@@ -26,6 +27,7 @@ self.addEventListener('fetch', event => {
 
 // Activate event - clear old caches
 self.addEventListener('activate', event => {
+    clients.claim(); // Take control of all clients immediately
     const cacheWhitelist = [CACHE_NAME];
     event.waitUntil(
         caches.keys().then(cacheNames => {
