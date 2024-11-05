@@ -1,4 +1,4 @@
-const CACHE_NAME = 'window-screen-cache-v2'; // Update version when you make changes
+const CACHE_NAME = 'window-screen-cache-v3'; // Update version when you make changes
 const urlsToCache = [
     '/index.html',
     '/sliding-window.jpg',
